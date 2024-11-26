@@ -75,7 +75,8 @@ export class CrudEstanteriaComponent implements OnInit {
     let columnaBuscada = j + 1;
     const estanteriasConRotacion = ['ESTANTERÍA 1 [ENFRENTE]', 'ESTANTERÍA 2 [ENFRENTE]','ESTANTERÍA 5 [ATRÁS]'];
     const esPantallaGrande = window.innerWidth > 1024;
-  
+
+    // Verificamos si la estantería tiene rotación
     if (
       esPantallaGrande && 
       estanteriasConRotacion.some(criterio => nombreEstanteria.toUpperCase().includes(criterio))
@@ -83,26 +84,41 @@ export class CrudEstanteriaComponent implements OnInit {
       const totalColumnas = Math.max(...this.ubicaciones
         .filter(u => u.nombreEstanteria === nombreEstanteria)
         .map(u => u.columna));
+      // La columna se calcula en función de la rotación
       columnaBuscada = totalColumnas - j;
     }
+
     const ubicacion = this.ubicaciones.find(ubicacion =>
       ubicacion.fila === (i + 1) &&
       ubicacion.columna === columnaBuscada &&
       ubicacion.nombreEstanteria === nombreEstanteria
     );
-  
+
     return ubicacion ? ubicacion.dato : '';
   }
-  
+
 
   ubicacionExistente(i: number, j: number, nombreEstanteria: string): boolean {
+    const columna = this.calcularColumna(i, j, nombreEstanteria);
     return this.ubicaciones.some(ubicacion =>
       ubicacion.fila === (i + 1) &&
-      ubicacion.columna === (j + 1) &&
+      ubicacion.columna === columna &&
       ubicacion.nombreEstanteria === nombreEstanteria
     );
   }
+  calcularColumna(i: number, j: number, nombreEstanteria: string): number {
+    let columna = j + 1;
+    const estanteriasConRotacion = ['ESTANTERÍA 1 [ENFRENTE]', 'ESTANTERÍA 2 [ENFRENTE]', 'ESTANTERÍA 5 [ATRÁS]'];
 
+    if (estanteriasConRotacion.some(criterio => nombreEstanteria.toUpperCase().includes(criterio))) {
+      const totalColumnas = Math.max(...this.ubicaciones
+        .filter(u => u.nombreEstanteria === nombreEstanteria)
+        .map(u => u.columna));
+      columna = totalColumnas - j;
+    }
+
+    return columna;
+  }
   crearCelda(i: number, j: number, nombreEstanteria: string) {
     const key = `${i}-${j}-${nombreEstanteria}`;
     this.isEditing[key] = true;
@@ -112,9 +128,11 @@ export class CrudEstanteriaComponent implements OnInit {
 
   editarCelda(i: number, j: number, nombreEstanteria: string) {
     const key = `${i}-${j}-${nombreEstanteria}`;
+    const columna = this.calcularColumna(i, j, nombreEstanteria);
+
     const ubicacion = this.ubicaciones.find(ubicacion =>
       ubicacion.fila === (i + 1) &&
-      ubicacion.columna === (j + 1) &&
+      ubicacion.columna === columna &&
       ubicacion.nombreEstanteria === nombreEstanteria
     );
 
@@ -126,66 +144,69 @@ export class CrudEstanteriaComponent implements OnInit {
       alert('No hay datos en esta celda para editar');
     }
   }
-
   guardarUbicacion(i: number, j: number, nombreEstanteria: string) {
     const key = `${i}-${j}-${nombreEstanteria}`;
+    const columna = this.calcularColumna(i, j, nombreEstanteria);
+
     const ubicacion = {
-        fila: i + 1,
-        columna: j + 1,
-        nombreEstanteria: nombreEstanteria,
-        dato: this.newUbicacion[key]
+      fila: i + 1,
+      columna: columna,
+      nombreEstanteria: nombreEstanteria,
+      dato: this.newUbicacion[key]
     };
 
     if (this.editingId[key]) {
-        const id = this.editingId[key];
-        this.firebaseService.editar('ubicacionesEstanterias', { ...ubicacion, id }) 
-            .then(() => {
-                console.log('Ubicación actualizada');
-                this.isEditing[key] = false;
-                this.actualizarUbicaciones(); // Refrescar las ubicaciones
-            })
-            .catch((error) => {
-                console.error('Error al actualizar ubicación:', error);
-            });
+      const id = this.editingId[key];
+      this.firebaseService.editar('ubicacionesEstanterias', { ...ubicacion, id })
+        .then(() => {
+          console.log('Ubicación actualizada');
+          this.isEditing[key] = false;
+          this.actualizarUbicaciones(); // Refrescar las ubicaciones
+        })
+        .catch((error) => {
+          console.error('Error al actualizar ubicación:', error);
+        });
     } else {
-        // Crear un nuevo registro
-        this.firebaseService.insertar('ubicacionesEstanterias', ubicacion)
-            .then(() => {
-                console.log('Ubicación creada');
-                this.isEditing[key] = false;
-                this.actualizarUbicaciones(); // Refrescar las ubicaciones
-            })
-            .catch((error) => {
-                console.error('Error al guardar ubicación:', error);
-            });
+      // Crear un nuevo registro
+      this.firebaseService.insertar('ubicacionesEstanterias', ubicacion)
+        .then(() => {
+          console.log('Ubicación creada');
+          this.isEditing[key] = false;
+          this.actualizarUbicaciones(); // Refrescar las ubicaciones
+        })
+        .catch((error) => {
+          console.error('Error al guardar ubicación:', error);
+        });
     }
-}
-actualizarUbicaciones() {
-  this.firebaseService.listado('ubicacionesEstanterias').subscribe(
+  }
+  actualizarUbicaciones() {
+    this.firebaseService.listado('ubicacionesEstanterias').subscribe(
       (ubicaciones) => {
-          this.ubicaciones = ubicaciones;
+        this.ubicaciones = ubicaciones;
       },
       (error) => {
-          console.error('Error al obtener ubicaciones:', error);
+        console.error('Error al obtener ubicaciones:', error);
       }
-  );
-}
-eliminarCelda(i: number, j: number, nombreEstanteria: string) {
-  const ubicacion = this.ubicaciones.find(ubicacion =>
-    ubicacion.fila === (i + 1) &&
-    ubicacion.columna === (j + 1) &&
-    ubicacion.nombreEstanteria === nombreEstanteria
-  );
-
-  if (ubicacion) {
-    alertEliminar(
-      () => this.firebaseService.eliminar(ubicacion.id, 'ubicacionesEstanterias'),
-      `Ubicación en fila ${i + 1}, columna ${j + 1}`,
-      '/crud-estanteria'
     );
   }
-}
-  buscar() {
+
+  eliminarCelda(i: number, j: number, nombreEstanteria: string) {
+    const ubicacion = this.ubicaciones.find(ubicacion =>
+      ubicacion.fila === (i + 1) &&
+      ubicacion.columna === (j + 1) &&
+      ubicacion.nombreEstanteria === nombreEstanteria
+    );
+  
+    if (ubicacion) {
+      alertEliminar(
+        () => this.firebaseService.eliminar(ubicacion.id, 'ubicacionesEstanterias'),
+        `Ubicación en fila ${i + 1}, columna ${j + 1}`,
+        '/crud-estanteria'
+      );
+    }
+  }
+  
+    buscar() {
     if (this.busqueda.trim() === '') {
       this.resultados = [];
       return;
