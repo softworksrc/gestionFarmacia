@@ -34,8 +34,9 @@ export class ProductoMalEstadoIndexComponent implements OnInit {
     const input = event.target as HTMLInputElement; // Asegurarse de que es un input
     const filtro = input.value.toLowerCase(); // Obtener el valor del input
     this.productosFiltrados = this.productos.filter(producto =>
+      producto.codigo.toString().toLowerCase().includes(filtro) || // Filtrar por cantidad
       producto.cantidad.toString().toLowerCase().includes(filtro) || // Filtrar por cantidad
-      producto.nombreMedicamento.toLowerCase().includes(filtro) || // Filtrar por nombre del medicamento
+      producto.producto.toLowerCase().includes(filtro) || // Filtrar por nombre del medicamento
       producto.descripcion.toLowerCase().includes(filtro) // Filtrar por descripción
     );
   }
