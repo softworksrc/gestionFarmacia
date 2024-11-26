@@ -43,7 +43,7 @@ export class CrearProductoMalEstadoComponent implements OnInit {
     const rutaRedireccion = '/crear-producto-mal-estado';
     const carpeta ="productosMalEstado";
     const datos = {
-      nombreMedicamento : this.producto,
+      producto : this.producto,
       cantidad :this.cantidad,
       descripcion : this.descripcion,
       codigo: this.codigo 

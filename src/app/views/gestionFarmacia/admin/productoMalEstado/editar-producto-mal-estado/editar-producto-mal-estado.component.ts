@@ -17,10 +17,11 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 })
 export class EditarProductoMalEstadoComponent implements OnInit {
   autenticado: boolean = false;
-  nombreMedicamento: string = '';
+  producto: string = '';
   cantidad: number = 0;
   descripcion: string = '';
   id: string = '';
+  codigo:string='';
 
   constructor(
     private firebaseRealtimeDatabaseService: FirebaseRealTimeDatabaseService,
@@ -53,7 +54,8 @@ export class EditarProductoMalEstadoComponent implements OnInit {
     const carpeta = "productosMalEstado";
     this.firebaseRealtimeDatabaseService.obtenerPorId(id,carpeta).subscribe(producto => {
       if (producto) {
-        this.nombreMedicamento = producto.nombreMedicamento;
+        this.codigo = producto.codigo;
+        this.producto = producto.producto;
         this.cantidad = producto.cantidad;
         this.descripcion = producto.descripcion;
       }
@@ -65,11 +67,12 @@ export class EditarProductoMalEstadoComponent implements OnInit {
     const carpeta = "productosMalEstado";
     const datos ={
       id: this.id,
-      nombreMedicamento: this.nombreMedicamento,
+      codigo: this.codigo,
+      producto: this.producto,
       cantidad: this.cantidad,
       descripcion: this.descripcion
     }
-    alertResultado('editar', this.nombreMedicamento, () => this.firebaseRealtimeDatabaseService.editar(carpeta,datos), rutaRedireccion);
+    alertResultado('editar', this.producto, () => this.firebaseRealtimeDatabaseService.editar(carpeta,datos), rutaRedireccion);
   }
   regresar() {
     this.router.navigate(['/lista-producto-mal-estado']); 
