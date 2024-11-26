@@ -45,5 +45,8 @@ export class ProductoMalEstadoIndexComponent implements OnInit {
   regresar() {
     this.router.navigate(['/menu']);
   }
+  estanteria() {
+    this.router.navigate(['/estanteria']);
+  }
   
 }

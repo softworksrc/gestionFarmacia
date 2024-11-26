@@ -160,5 +160,8 @@ scrollToResultado(resultado: any) {
 regresar() {
   this.router.navigate(['/menu']); 
 }
+productoMalEstado() {
+  this.router.navigate(['/producto-mal-estado-index']); 
+}
 }
 

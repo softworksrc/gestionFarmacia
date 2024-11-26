@@ -189,20 +189,23 @@ export class CrudEstanteriaComponent implements OnInit {
       }
     );
   }
-
   eliminarCelda(i: number, j: number, nombreEstanteria: string) {
+    const columna = this.calcularColumna(i, j, nombreEstanteria);
+  
     const ubicacion = this.ubicaciones.find(ubicacion =>
       ubicacion.fila === (i + 1) &&
-      ubicacion.columna === (j + 1) &&
+      ubicacion.columna === columna &&
       ubicacion.nombreEstanteria === nombreEstanteria
     );
   
     if (ubicacion) {
       alertEliminar(
         () => this.firebaseService.eliminar(ubicacion.id, 'ubicacionesEstanterias'),
-        `Ubicación en fila ${i + 1}, columna ${j + 1}`,
+        `Ubicación en fila ${i + 1}, columna ${columna}`,
         '/crud-estanteria'
       );
+    } else {
+      alert('No hay datos en esta celda para eliminar');
     }
   }
   

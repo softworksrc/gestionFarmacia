@@ -2,6 +2,7 @@
     .letraPequeña {
         font-size: 10px; /* O ajusta al tamaño deseado */
     }
+
 }
 @media (max-width: 325.98px) {
     .letraMuyPequeña {

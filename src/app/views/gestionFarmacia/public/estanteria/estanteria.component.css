@@ -8,9 +8,17 @@
     .letraPequeña {
         font-size: 10px; /* O ajusta al tamaño deseado */
     }
+    .botonPequeño {
+        font-size: 14px;
+        margin-top: -10px;
+    }
 }
 @media (max-width: 325.98px) {
     .letraMuyPequeña {
         font-size: 5px; /* O ajusta al tamaño deseado */
+    }
+    .botonPequeño {
+        margin-top: -20px;
+        font-size: 12px;
     }
 }
