@@ -1,0 +1,10 @@
+@media (max-width: 415.98px) {
+    .letraPequeña {
+        font-size: 10px; /* O ajusta al tamaño deseado */
+    }
+}
+@media (max-width: 325.98px) {
+    .letraMuyPequeña {
+        font-size: 5px; /* O ajusta al tamaño deseado */
+    }
+}

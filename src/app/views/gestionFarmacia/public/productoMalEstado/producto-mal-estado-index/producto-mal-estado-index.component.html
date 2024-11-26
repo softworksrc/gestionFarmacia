@@ -34,20 +34,20 @@
         <table class="table table-hover">
           <thead class="table-primary">
             <tr>
-              <th class="fs-6 text-center col-3 col-sm-2 col-md-1">Código</th>
-              <th class="fs-6 text-center col-3 col-sm-2 col-md-1">Cantidad</th>
-              <th class="fs-6 text-center col-5 col-sm-3 col-md-2">Nombre del Medicamento</th>
-              <th class="fs-6 text-center col-6 col-sm-4 col-md-2">Descripción</th>
+              <th class="text-center col-3 col-sm-2 col-md-1 letraPequeña letraMuyPequeña " >Código</th>
+              <th class="text-center col-3 col-sm-2 col-md-1 letraPequeña letraMuyPequeña">Cantidad</th>
+              <th class="text-center col-5 col-sm-3 col-md-2 letraPequeña letraMuyPequeña">Nombre</th>
+              <th class="text-center col-6 col-sm-4 col-md-2 letraPequeña letraMuyPequeña">Descripción</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let producto of productosFiltrados">
-              <td class="text-center fs-6">{{ producto.codigo }}</td>
-              <td class="text-center fs-6">{{ producto.cantidad }}</td>
-              <td class="text-center text-wrap fs-6" style="max-width: 100px; overflow-wrap: break-word;">
+              <td class="text-center letraPequeña letraMuyPequeña">{{ producto.codigo }}</td>
+              <td class="text-center letraPequeña letraMuyPequeña">{{ producto.cantidad }}</td>
+              <td class="text-center letraPequeña letraMuyPequeña ">
                 {{ producto.producto }}
               </td>
-              <td class="text-center text-wrap fs-6" style="max-width: 150px; overflow-wrap: break-word;">
+              <td class="text-center text-wrap letraPequeña letraMuyPequeña" >
                 {{ producto.descripcion }}
               </td>
             </tr>
