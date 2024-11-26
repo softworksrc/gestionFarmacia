@@ -1,13 +1,17 @@
 <div class="container mt-5">
   <div class="card shadow-lg rounded-4 overflow-hidden">
     <!-- Encabezado -->
-    <div class="d-flex align-items-center bg-primary text-white p-3">
+    <div class="d-flex flex-wrap align-items-center bg-primary text-white p-3">
       <!-- Botón de Home -->
-      <button (click)="regresar()" class="btn btn-outline-light me-3 d-flex align-items-center">
+      <button 
+        (click)="regresar()" 
+        class="btn btn-outline-light me-3 d-flex align-items-center mb-2 mb-md-0">
         <i class="bi bi-house-door-fill me-2"></i> Home
       </button>
       <!-- Título -->
-      <h1 class="text-center flex-grow-1 m-0">Productos en Mal Estado</h1>
+      <h1 class="text-center flex-grow-1 m-0 text-truncate fs-4">
+        Productos en Mal Estado
+      </h1>
     </div>
 
     <!-- Contenido -->
@@ -40,11 +44,11 @@
             <tr *ngFor="let producto of productosFiltrados">
               <td class="text-center">{{ producto.codigo }}</td>
               <td class="text-center">{{ producto.cantidad }}</td>
-              <td class="text-center">{{ producto.producto }}</td>
-              <td class="text-center">{{ producto.descripcion }}</td>
+              <td class="text-center text-wrap" style="word-wrap: break-word; max-width: 200px;">{{ producto.producto }}</td>
+              <td class="text-center text-wrap" style="word-wrap: break-word; max-width: 200px;">{{ producto.descripcion }}</td>
             </tr>
             <tr *ngIf="productosFiltrados.length === 0">
-              <td colspan="3" class="text-center text-muted">
+              <td colspan="4" class="text-center text-muted">
                 No se encontraron resultados.
               </td>
             </tr>
