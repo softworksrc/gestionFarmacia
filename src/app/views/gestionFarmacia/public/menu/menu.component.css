@@ -1,0 +1,20 @@
+.fondoProductoMalEstado{
+    background-image: url('/assets/img/vinculoProductoMalEstado.jpg');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+.fondoEstanteria{
+    background-image: url('/assets/img/vinculoEstanteria.jpg');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+
+.fondoAdministrativo{
+    background-image: url('/assets/img/vinculoAdministracion.jpg');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat; 
+}

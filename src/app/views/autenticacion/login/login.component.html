@@ -1,0 +1,32 @@
+<div *ngIf="!autenticado" class="d-flex justify-content-center align-items-center min-vh-100" style="background-image: url('assets/img/fondoLogin.jpeg'); background-size: cover; background-position: center;">
+  <div class="card shadow-lg p-5" style="max-width: 450px; width: 100%; border-radius: 15px; background-color: rgba(255, 255, 255, 0.392); border: 2px solid #4c5c77;">
+    <div class="text-center mb-4">
+      <img src="assets/img/logo.png" alt="Logo" class="img-fluid rounded-circle" style="max-width: 100px; border: 5px solid #fff;">
+    </div>
+    <h3 class="text-center mb-4 text-dark">Administración</h3>
+    <form (ngSubmit)="autenticarUsuario()">
+      <div class="mb-4">
+        <label for="emailSelect" class="form-label text-dark">Seleccionar Usuario:</label>
+        <select id="emailSelect" [(ngModel)]="email" name="email" class="form-control form-control-lg" required style="background-color: rgba(255, 255, 255, 0.392); border: 2px solid #4c5c77; color: #333;">
+          <option [value]="'23rcroberto&#64;gmail.com'">23rcroberto&#64;gmail.com</option>
+          <option [value]="'elena&#64;gmail.com'">elena&#64;gmail.com</option>
+        </select>        
+      </div>
+      <div class="mb-4 position-relative">
+        <input id="password" type="password" [(ngModel)]="password" name="password" class="form-control form-control-lg ps-5" placeholder="Contraseña" required style="background-color: rgba(255, 255, 255, 0.493); border: 2px solid #4c5c77; color: #333;" />
+        <i class="bi bi-lock position-absolute top-50 start-0 translate-middle-y ms-3 text-dark"></i>
+      </div>
+      <div class="d-grid gap-2 mb-3">
+        <button type="submit" class="btn btn-outline-dark btn-lg shadow-sm" style="border: 2px solid #333; background-color: transparent; font-weight: bold;">
+          Iniciar Sesión
+        </button>
+      </div>
+      <div class="d-grid gap-2 mb-3">
+        <button (click)="regresar()"class="btn btn-outline-dark btn-lg shadow-sm" style="border: 2px solid #333; background-color: transparent; font-weight: bold;">
+      Regresar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<app-crear-producto-mal-estado *ngIf="autenticado"></app-crear-producto-mal-estado>

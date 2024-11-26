@@ -1,0 +1,56 @@
+<div class="container mt-5">
+  <div class="card shadow-lg rounded-4 overflow-hidden">
+    <!-- Encabezado -->
+    <div class="d-flex align-items-center bg-primary text-white p-3">
+      <!-- Botón de Home -->
+      <button (click)="regresar()" class="btn btn-outline-light me-3 d-flex align-items-center">
+        <i class="bi bi-house-door-fill me-2"></i> Home
+      </button>
+      <!-- Título -->
+      <h1 class="text-center flex-grow-1 m-0">Productos en Mal Estado</h1>
+    </div>
+
+    <!-- Contenido -->
+    <div class="card-body">
+      <!-- Buscador -->
+      <div class="input-group mb-4">
+        <span class="input-group-text bg-primary text-white">
+          <i class="bi bi-search"></i>
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar..."
+          (input)="filtrarProductos($event)"
+        />
+      </div>
+
+      <!-- Tabla -->
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-primary">
+            <tr>
+              <th class="text-center">Código</th>
+              <th class="text-center">Cantidad</th>
+              <th class="text-center">Nombre del Medicamento</th>
+              <th class="text-center">Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of productosFiltrados">
+              <td class="text-center">{{ producto.codigo }}</td>
+              <td class="text-center">{{ producto.cantidad }}</td>
+              <td class="text-center">{{ producto.producto }}</td>
+              <td class="text-center">{{ producto.descripcion }}</td>
+            </tr>
+            <tr *ngIf="productosFiltrados.length === 0">
+              <td colspan="3" class="text-center text-muted">
+                No se encontraron resultados.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

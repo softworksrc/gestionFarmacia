@@ -1,0 +1,7 @@
+/* Rotar las columnas en dispositivos móviles */
+@media (max-width: 768px) {
+  .rotar-columnas {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
