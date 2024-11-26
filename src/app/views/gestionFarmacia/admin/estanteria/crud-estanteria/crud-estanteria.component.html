@@ -37,16 +37,16 @@
                    [id]="'celda-' + estanteria.nombreEstanteria + '-' + i + '-' + j">
           
                 <div *ngIf="ubicacionExistente(i, j, estanteria.nombreEstanteria)">
-                  <div class="d-block d-sm-none" style="font-size: 30%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
-                  <div class="d-none d-sm-block d-md-none" style="font-size: 40%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
-                  <div class="d-none d-md-block d-lg-none" style="font-size: 60%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
-                  <div class="d-none d-lg-block d-xxl-none" style="font-size: 70%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
-                  <div class="d-none d-xxl-block" style="font-size: 90%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
+                  <div class="d-block d-sm-none break-word" style="font-size: 30%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
+                  <div class="d-none d-sm-block d-md-none break-word" style="font-size: 40%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
+                  <div class="d-none d-md-block d-lg-none break-word" style="font-size: 60%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
+                  <div class="d-none d-lg-block d-xxl-none break-word" style="font-size: 70%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
+                  <div class="d-none d-xxl-block break-word" style="font-size: 90%;">{{ obtenerDatoCelda(i, j, estanteria.nombreEstanteria) }}</div>
                 </div>
                 <div *ngIf="!ubicacionExistente(i, j, estanteria.nombreEstanteria)">
-                  <div class="text-muted fst-italic">Vacío</div>
+                  <div class="text-muted fst-italic letraMuyPequeña letraPequeña">Vacío</div>
                 </div>
-                <div class="btn-group mt-auto" role="group">
+                <div class="btn-groupe btn-group mt-auto" role="group">
                   <button *ngIf="!ubicacionExistente(i, j, estanteria.nombreEstanteria)"
                           id="btnCrearCelda"
                           class="btn btn-outline-success btn-sm d-inline-block d-xxl-none"
@@ -61,13 +61,13 @@
                           (click)="crearCelda(i, j, estanteria.nombreEstanteria)">
                     <i class="bi bi-plus-circle fs-8"></i> Crear
                   </button>
-                  
+                
                   <ng-container *ngIf="ubicacionExistente(i, j, estanteria.nombreEstanteria)">
                     <button id="btnEditarCelda"
-                       class="btn btn-outline-primary btn-sm d-inline-block d-xxl-none"
-                       style="border: none; background: transparent; padding: 0;" 
-                       (click)="editarCelda(i, j, estanteria.nombreEstanteria)">
-                        <i class="bi bi-pencil-square fs-8"></i>
+                           class="btn btn-outline-primary btn-sm d-inline-block d-xxl-none"
+                           style="border: none; background: transparent; padding: 0;" 
+                           (click)="editarCelda(i, j, estanteria.nombreEstanteria)">
+                      <i class="bi bi-pencil-square fs-8"></i>
                     </button>
                     <button id="btnEditarCeldaDesktop" 
                             class="btn btn-outline-primary btn-sm d-none d-xxl-inline-block"
@@ -87,8 +87,6 @@
                     </button>
                   </ng-container>
                 </div>
-                
-
                 <div *ngIf="isEditing[i + '-' + j + '-' + estanteria.nombreEstanteria]" class="mt-3">
                   <input type="text" [(ngModel)]="newUbicacion[i + '-' + j + '-' + estanteria.nombreEstanteria]" 
                          placeholder="Ingrese dato..." 

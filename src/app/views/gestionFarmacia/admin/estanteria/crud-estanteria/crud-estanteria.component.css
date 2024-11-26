@@ -5,3 +5,23 @@
     flex-direction: column-reverse;
   }
 }
+.break-word {
+  word-break: break-word; 
+  overflow-wrap: break-word;
+  hyphens: auto; 
+}
+
+@media (max-width: 415.98px) {
+  .letraPequeña {
+      font-size: 10px; 
+  }
+}
+@media (max-width: 325.98px) {
+  .letraMuyPequeña {
+      font-size: 5px;
+  }
+  .btn-groupe button {
+    width: 100%; 
+    margin-bottom: 10px; 
+  }
+}

@@ -18,3 +18,27 @@
     background-position: center; 
     background-repeat: no-repeat; 
 }
+
+@media (max-width: 415px) {
+    .letraMuyPequena {
+      font-size: 70%;
+    }
+  
+    .letraMuyPequena i {
+      font-size: 70%; 
+    }
+  
+    .btn {
+      width: 5%;
+    }
+  }
+
+@media (max-width: 325.98px) {
+    
+    img {
+        max-width: 30%;
+        min-height: 10%;
+  
+      }
+
+}
