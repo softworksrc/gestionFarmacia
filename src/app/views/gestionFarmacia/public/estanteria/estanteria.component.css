@@ -8,6 +8,9 @@
     .letraPequeña {
         font-size: 10px; /* O ajusta al tamaño deseado */
     }
+    .letraMuyPequeña {
+        font-size: 5px; /* O ajusta al tamaño deseado */
+    }
     .botonPequeño {
         font-size: 14px;
         margin-top: -10px;
