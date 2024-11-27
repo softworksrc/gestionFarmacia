@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <div class="card shadow-lg">
+    <div class="d-flex align-items-center bg-primary text-white p-3">
+      <button (click)="regresar()" class="btn btn-outline-light me-3 d-flex align-items-center">
+        <i class="bi bi-house-door-fill me-2"></i> Home
+      </button>
+      <h1 class="text-center flex-grow-1 m-0">Inventario de Productos</h1>
+    </div>
+    <div class="card-body">
+      <!-- Botón para guardar los datos -->
+      <button (click)="guardarDatos()" class="btn btn-success mb-3">
+        Guardar Datos
+      </button>
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+                <th class="columnaPequeña letraPequeña break-word">Código</th>
+                <th class="columnaPequeña letraPequeña break-word">Nombre</th>   
+                <th class="columnaPequeña letraPequeña break-word">Existencia</th> 
+                <th class="columnaPequeña letraPequeña break-word">Vendido</th>  
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of productos" [ngClass]="{'table-success': producto.existencia, 'table-danger': producto.vendido}">
+              <td class="letraPequeña break-word">{{ producto.codigo }}</td>
+              <td class="letraPequeña break-word">{{ producto.producto }}</td>
+              <td>
+                <!-- Checkbox para existencia con clases de Bootstrap -->
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input form-check-lg" [(ngModel)]="producto.existencia" (change)="actualizarExistencia(producto)" />
+                </div>
+              </td>
+              <td>
+                <!-- Checkbox para vendido con clases de Bootstrap -->
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input form-check-lg" [(ngModel)]="producto.vendido" [disabled]="producto.existencia" (change)="marcarVendido(producto)" />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+@media (max-width: 415.98px) {
+    .columnaPequeña {
+      width: 1px; 
+    }
+    .letraPequeña {
+        font-size: 10px; /* O ajusta al tamaño deseado */
+    }
+  }
+  .break-word {
+    word-break: break-word; 
+    overflow-wrap: break-word;
+    hyphens: auto; 
+  }

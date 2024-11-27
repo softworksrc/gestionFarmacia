@@ -11,6 +11,7 @@ import { CrudEstanteriaComponent } from '../app/views/gestionFarmacia/admin/esta
 import { NavbarComponent } from '../app/views/gestionFarmacia/admin/navbar/navbar.component';
 import { EstanteriaComponent } from '../app/views/gestionFarmacia/public/estanteria/estanteria.component';
 import { MenuAdministrativoComponent } from '../app/views/gestionFarmacia/admin/menu-administrativo/menu-administrativo.component';
+import { InventarioProductoMalEstadoComponent } from '../app/views/gestionFarmacia/admin/productoMalEstado/inventario-producto-mal-estado/inventario-producto-mal-estado.component';
 
 
 
@@ -30,6 +31,7 @@ export const routes: Routes = [
     { path: 'crud-estanteria', component: CrudEstanteriaComponent,canActivate: [AuthGuard] },
     { path: 'navbar', component: NavbarComponent,canActivate: [AuthGuard] },
     { path: 'menu-administrativo', component: MenuAdministrativoComponent,canActivate: [AuthGuard] },
+    { path: 'inventario-producto-mal-estado', component: InventarioProductoMalEstadoComponent,canActivate: [AuthGuard] },
 
     //PUBLIC
     { path: 'producto-mal-estado-index', component: ProductoMalEstadoIndexComponent},
