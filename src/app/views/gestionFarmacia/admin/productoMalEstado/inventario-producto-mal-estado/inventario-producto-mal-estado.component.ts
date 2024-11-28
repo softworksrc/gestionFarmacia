@@ -15,6 +15,8 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 })
 export class InventarioProductoMalEstadoComponent implements OnInit {
   productos: any[] = [];
+  productosFiltrados: any[] = []; // Productos filtrados
+  searchTerm: string = ''; // Término de búsqueda
 
   constructor(
     private firebaseService: FirebaseRealTimeDatabaseService,
@@ -26,6 +28,7 @@ export class InventarioProductoMalEstadoComponent implements OnInit {
     const carpeta = 'productosMalEstado';
     this.firebaseService.listado(carpeta).subscribe((productos) => {
       this.productos = productos;
+      this.productosFiltrados = productos; // Inicializar con todos los productos
     });
   }
 
@@ -45,6 +48,15 @@ export class InventarioProductoMalEstadoComponent implements OnInit {
     if (producto.vendido) {
       console.log(`Producto ${producto.codigo} marcado como vendido.`);
     }
+  }
+
+  // Filtrar productos por código o nombre
+  filtrarProductos(): void {
+    const searchTermLower = this.searchTerm.toLowerCase();
+    this.productosFiltrados = this.productos.filter(producto =>
+      producto.codigo.toLowerCase().includes(searchTermLower) ||
+      producto.producto.toLowerCase().includes(searchTermLower)
+    );
   }
 
   guardarDatos(): void {
@@ -73,13 +85,13 @@ export class InventarioProductoMalEstadoComponent implements OnInit {
         
         // Actualizamos la lista visualmente sin recargar la página
         this.productos = this.productos.filter(producto => !producto.vendido); // Eliminar los productos vendidos de la vista
+        this.filtrarProductos(); // Volver a filtrar la lista
       })
       .catch(() => {
         // Si alguna operación falla, mostramos el mensaje de error
         alertError('Hubo un error al guardar los datos. Por favor, intenta nuevamente.');
       });
   }
-
 
   regresar(): void {
     // Redirigir a la página principal

@@ -8,6 +8,17 @@
       <h1 class="text-center flex-grow-1 m-0">Inventario de Productos</h1>
     </div>
     <div class="card-body">
+      <!-- Campo de búsqueda -->
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar por código o nombre"
+          [(ngModel)]="searchTerm"
+          (input)="filtrarProductos()"
+        />
+      </div>
+
       <!-- Botón para guardar los datos -->
       <button (click)="guardarDatos()" class="btn btn-success mb-3">
         Guardar Datos
@@ -24,7 +35,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let producto of productos" [ngClass]="{'table-success': producto.existencia, 'table-danger': producto.vendido}">
+            <tr *ngFor="let producto of productosFiltrados" [ngClass]="{'table-success': producto.existencia, 'table-danger': producto.vendido}">
               <td class="letraPequeña break-word">{{ producto.codigo }}</td>
               <td class="letraPequeña break-word">{{ producto.producto }}</td>
               <td>
