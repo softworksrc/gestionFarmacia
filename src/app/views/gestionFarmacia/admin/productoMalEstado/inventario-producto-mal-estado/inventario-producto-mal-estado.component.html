@@ -8,7 +8,6 @@
       <h1 class="text-center flex-grow-1 m-0">Inventario de Productos</h1>
     </div>
     <div class="card-body">
-      <!-- Campo de búsqueda -->
       <div class="mb-3">
         <input
           type="text"
@@ -18,8 +17,6 @@
           (input)="filtrarProductos()"
         />
       </div>
-
-      <!-- Botón para guardar los datos -->
       <button (click)="guardarDatos()" class="btn btn-success mb-3">
         Guardar Datos
       </button>
@@ -28,10 +25,10 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-                <th class="columnaPequeña letraPequeña break-word">Código</th>
-                <th class="columnaPequeña letraPequeña break-word">Nombre</th>   
-                <th class="columnaPequeña letraPequeña break-word">Existencia</th> 
-                <th class="columnaPequeña letraPequeña break-word">Vendido</th>  
+              <th class="columnaPequeña letraPequeña break-word">Código</th>
+              <th class="columnaPequeña letraPequeña break-word">Nombre</th>   
+              <th class="columnaPequeña letraPequeña break-word text-center">Existencia</th> 
+              <th class="columnaPequeña letraPequeña break-word  text-center">Vendido</th>  
             </tr>
           </thead>
           <tbody>
@@ -39,15 +36,24 @@
               <td class="letraPequeña break-word">{{ producto.codigo }}</td>
               <td class="letraPequeña break-word">{{ producto.producto }}</td>
               <td>
-                <!-- Checkbox para existencia con clases de Bootstrap -->
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input form-check-lg" [(ngModel)]="producto.existencia" (change)="actualizarExistencia(producto)" />
+                <div class="form-check d-flex justify-content-center">
+                  <input
+                    type="checkbox"
+                    class="form-check-input form-check-lg border border-primary rounded-1 shadow-sm"
+                    [(ngModel)]="producto.existencia"
+                    (change)="actualizarExistencia(producto)"
+                  />
                 </div>
               </td>
               <td>
-                <!-- Checkbox para vendido con clases de Bootstrap -->
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input form-check-lg" [(ngModel)]="producto.vendido" [disabled]="producto.existencia" (change)="marcarVendido(producto)" />
+                <div class="form-check d-flex justify-content-center">
+                  <input
+                    type="checkbox"
+                    class="form-check-input form-check-lg border border-danger rounded-1 shadow-sm"
+                    [(ngModel)]="producto.vendido"
+                    [disabled]="producto.existencia"
+                    (change)="marcarVendido(producto)"
+                  />
                 </div>
               </td>
             </tr>
